@@ -1,14 +1,14 @@
-(* fun cnt(x:int)=
-    if x=0
-    then []
-    else x::cnt(x-1)
+fun write(filename:string, texttowrite:string) =
+    let val file = TextIO.openOut(filename)
+        val _ = TextIO.output(file, texttowrite)
+    in TextIO.closeOut(file)
+    end
 
-fun append(xs:int list, ys: int list)=
-    if null xs
-    then ys
-    else (hd xs) ::append((tl xs),ys) *)
-
-
-fun count (from: int)=
-    from + 10
-val a=count 16
+(* Read a nice poem from a file into a list of strings *)
+fun read(filename) =
+    let val file = TextIO.openIn filename
+        val textread = TextIO.inputAll file
+        val _ = TextIO.closeIn file
+    (* in String.tokens (fn c => c = #"\n") poem *)
+    in textread
+    end
