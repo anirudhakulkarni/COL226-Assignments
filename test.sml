@@ -18,16 +18,28 @@ fun read(filename) =
 fun replacedelim(toreplace , delim1 , delim2) = 
     let
         val quotes = 0
-        (* fun isqote char=
-            if char = #"\"" then true else false *)
-        fun increment a = 
-            let
-              (* val fuck =print(a^"FUCK")  *)
-            in
-              if a = "\"" then 1 else 0
-            end
-        
+        fun increment a = if a = "\"" then 1 else 0
         fun magic (toreplace , quotes) =
+            case toreplace of
+                "" => ""
+                | _ =>
+            let
+                val firstchar = String.substring(toreplace,0,1)
+                val secondpart = String.substring(toreplace,1,String.size toreplace-1)
+                (* val f = print(firstchar^"\n") *)
+                val isquote = increment firstchar
+                val abab=print(Int.toString(quotes)^"\n")
+                
+                
+                
+            in
+                if firstchar = String.str(delim1) then 
+                    if quotes mod 2 = 1 then 
+                        firstchar^ magic (secondpart, quotes+isquote)       
+                    else (String.str(delim2)^ magic (secondpart,quotes+isquote)) else
+                firstchar^ magic (secondpart,quotes+isquote)
+            end
+        fun adjustQuotes toreplace = 
             case toreplace of
                 "" => ""
                 | _ =>
@@ -48,28 +60,47 @@ fun replacedelim(toreplace , delim1 , delim2) =
             end
             
     in
-        magic (toreplace,quotes)
+        adjustQuotes (magic (toreplace,quotes))
     end
     
-fun sanityCheck textread=
+fun sanityCheck textread= true
     let
-      bindings
-    in
-      body
-    end
- 
+        val newline = 0
+        fun increment a = if a = "\n" then 1 else 0
+        fun magic (toreplace , quotes) =
+            case toreplace of
+                "" => ""
+                | _ =>
+            let
+                val firstchar = String.substring(toreplace,0,1)
+                val secondpart = String.substring(toreplace,1,String.size toreplace-1)
+                (* val f = print(firstchar^"\n") *)
+                val isquote = increment firstchar
+                val abab=print(Int.toString(quotes)^"\n")
+                
+                
+                
+            in
+                if firstchar = String.str(delim1) then 
+                    if quotes mod 2 = 1 then 
+                        firstchar^ magic (secondpart, quotes+isquote)       
+                    else (String.str(delim2)^ magic (secondpart,quotes+isquote)) else
+                firstchar^ magic (secondpart,quotes+isquote)
+            end
+
+
 fun convertDelimiters(infilename , delim1 , outfilename , delim2)= 
     let val textread = read(infilename)
         val sanity = sanityCheck textread
-        val replacedtext = replacedelim(textread , delim1 , delim2)
+        val replacedText = replacedelim(textread , delim1 , delim2)
     in 
-        write(outfilename , replacedtext)
+        write(outfilename , replacedText)
     end
 fun csv2tsv(infilename , outfilename)=
     convertDelimiters(infilename , #"," , outfilename , #";")
 fun tsv2csv(infilename , outfilename)=
     convertDelimiters(infilename , #"t" , outfilename , #",")
-fun replaceNewlines(toreplace , newline1 , newline2)="0"
+(* fun replaceNewlines(toreplace , newline1 , newline2)="0" *)
 
 
 (* fun convertNewlines(infilename , newline1 , outfilename , newline2)=
