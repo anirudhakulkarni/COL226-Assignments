@@ -53,15 +53,16 @@ fun replacedelim(toreplace , delim1 , delim2) =
             let
                 (* val t=Int.toString(curr)
                 val t2=Int.toString(String.size(text)) *)
-                val temp2=String.sub(text,curr)
-                val temp1=print(str(temp2))
+                (* val temp2=String.sub(text,curr)
+                val temp1=print(str(temp2)) *)
             
             in
             if isStart=true then
                if String.sub(text,curr)= #"\"" then
                     doubled(text,0,quotes,false)
                else 
-                "\""^String.substring(text,curr,1)^doubled(String.substring(text,curr+1,String.size(text) -curr-1),0,quotes,false)
+                    "\""^doubled(String.substring(text,curr,String.size(text) -curr),0,quotes,false)
+                (* "\""^String.substring(text,curr,1)^doubled(String.substring(text,curr+1,String.size(text) -curr-1),0,quotes,false) *)
             else
             
             if String.sub(text,curr)= delim  then 
@@ -87,7 +88,7 @@ fun replacedelim(toreplace , delim1 , delim2) =
                         if String.sub(text,curr+1)= #"\"" then
                             str(delim2)^doubled(String.substring(text,curr+1,String.size(text) -curr-1),0,quotes,false)
                         else
-                            if String.sub(text,curr+1)= delim then
+               (*here*)             if String.sub(text,curr+1)= delim then
                                 str(delim2)^"\"\""^doubled(String.substring(text,curr+1,String.size(text) -curr-1),0,quotes,false)
                             else
                                 str(delim2)^"\""^doubled(String.substring(text,curr+1,String.size(text) -curr-1),0,quotes,false)
