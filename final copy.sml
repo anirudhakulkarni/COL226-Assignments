@@ -46,72 +46,64 @@ fun replacedelim(toreplace , delim1 , delim2) =
             end
         
 
-        fun doubled(text, curr, quotes,isStart)=
+        fun doubled(text, curr, quotes)=
             case curr > String.size (text)-1 of
             true => ""
             | false =>
             let
                 (* val t=Int.toString(curr)
-                val t2=Int.toString(String.size(text)) *)
-                val temp2=String.sub(text,curr)
-                val temp1=print(str(temp2))
+                val t2=Int.toString(String.size(text))
+                val temp=test (t^t2^"\n")
+                val temp1=test(text) *)
             
             in
-            if isStart=true then
-               if String.sub(text,curr)= #"\"" then
-                    doubled(text,0,quotes,false)
-               else 
-                "\""^String.substring(text,curr,1)^doubled(String.substring(text,curr+1,String.size(text) -curr-1),0,quotes,false)
-            else
             
             if String.sub(text,curr)= delim  then 
                 if quotes mod 2 = 0 then
                     if curr>0 then
                         if String.sub(text,curr-1)= #"\"" then
                             if String.sub(text,curr+1)= #"\"" then
-                                String.substring(text,0,curr)^str(delim2)^doubled(String.substring(text,curr+1,String.size(text) -curr-1),0,quotes,false)
+                                String.substring(text,0,curr)^str(delim2)^doubled(String.substring(text,curr+1,String.size(text) -curr-1),0,quotes)
                             else
                                 if String.sub(text,curr+1)= delim orelse String.sub(text,curr+1)= #"\"" then
-                                    String.substring(text,0,curr)^str(delim2)^"\"\""^doubled(String.substring(text,curr+1,String.size(text) -curr-1),0,quotes,false)
+                                    String.substring(text,0,curr)^str(delim2)^"\"\""^doubled(String.substring(text,curr+1,String.size(text) -curr-1),0,quotes)
                                 else
-                                    String.substring(text,0,curr)^str(delim2)^"\""^doubled(String.substring(text,curr+1,String.size(text) -curr-1),0,quotes,false)
+                                    String.substring(text,0,curr)^str(delim2)^"\""^doubled(String.substring(text,curr+1,String.size(text) -curr-1),0,quotes)
                         else
                             if String.sub(text,curr+1)= #"\"" then
-                                String.substring(text,0,curr)^"\""^str(delim2)^doubled(String.substring(text,curr+1,String.size(text) -curr-1),0,quotes,false)
+                                String.substring(text,0,curr)^"\""^str(delim2)^doubled(String.substring(text,curr+1,String.size(text) -curr-1),0,quotes)
                             else
                                 if String.sub(text,curr+1)= delim then
-                                    String.substring(text,0,curr)^"\""^str(delim2)^"\"\""^doubled(String.substring(text,curr+1,String.size(text) -curr-1),0,quotes,false)
+                                    String.substring(text,0,curr)^"\""^str(delim2)^"\"\""^doubled(String.substring(text,curr+1,String.size(text) -curr-1),0,quotes)
                                 else
-                                    String.substring(text,0,curr)^"\""^str(delim2)^"\""^doubled(String.substring(text,curr+1,String.size(text) -curr-1),0,quotes,false)
+                                    String.substring(text,0,curr)^"\""^str(delim2)^"\""^doubled(String.substring(text,curr+1,String.size(text) -curr-1),0,quotes)
                     else
                         if String.sub(text,curr+1)= #"\"" then
-                            str(delim2)^doubled(String.substring(text,curr+1,String.size(text) -curr-1),0,quotes,false)
+                            str(delim2)^doubled(String.substring(text,curr+1,String.size(text) -curr-1),0,quotes)
                         else
                             if String.sub(text,curr+1)= delim then
-                                str(delim2)^"\"\""^doubled(String.substring(text,curr+1,String.size(text) -curr-1),0,quotes,false)
+                                str(delim2)^"\"\""^doubled(String.substring(text,curr+1,String.size(text) -curr-1),0,quotes)
                             else
-                                str(delim2)^"\""^doubled(String.substring(text,curr+1,String.size(text) -curr-1),0,quotes,false)
+                                str(delim2)^"\""^doubled(String.substring(text,curr+1,String.size(text) -curr-1),0,quotes)
                 else
-                    doubled(text,curr+1,quotes,false)
+                    doubled(text,curr+1,quotes)
             else    
                 if String.sub(text,curr)= #"\""  then
-                    (* if String.sub(text,curr-1)= #"\n" then *)
-                    doubled(text,curr+1,quotes+1,false)
+                    doubled(String.substring(text,curr+1,String.size(text)-1),curr+1,quotes+1)
                 else
                     if String.sub(text,curr)= #"\n" then
                         if quotes mod 2 = 0 then
                             if curr<String.size(text)-1 then
                                 if String.sub(text,curr-1)= #"\"" then
                                     if String.sub(text,curr+1)= #"\"" then
-                                        (* String.substring(text,0,curr+1)^doubled(String.substring(text,curr+1,String.size(text) -curr-1),0,quotes) *)
-                                        doubled(text,curr+1,quotes,false)
+                                        String.substring(text,0,curr+2)^doubled(String.substring(text,curr+1,String.size(text) -curr-1),0,quotes)
                                     else
-                                        String.substring(text,0,curr+1)^"\""^doubled(String.substring(text,curr+1,String.size(text) -curr-1),0,quotes,false)
+                                        String.substring(text,0,curr+1)^"\""^doubled(String.substring(text,curr+1,String.size(text) -curr-1),0,quotes)
                                 else
                                     if String.sub(text,curr+1)= #"\"" then
-                                        String.substring(text,0,curr)^"\"\n"^doubled(String.substring(text,curr+1,String.size(text) -curr-1),0,quotes,false)
+                                        String.substring(text,0,curr)^"\"\n"^doubled(String.substring(text,curr+1,String.size(text) -curr-1),0,quotes)
                                     else
-                                        String.substring(text,0,curr)^"\"\n\""^doubled(String.substring(text,curr+1,String.size(text) -curr-1),0,quotes,false)
+                                        String.substring(text,0,curr)^"\"\n\""^doubled(String.substring(text,curr+1,String.size(text) -curr-1),0,quotes)
                             else
                                 if String.sub(text,curr-1)= #"\"" then
                                     text
@@ -120,9 +112,9 @@ fun replacedelim(toreplace , delim1 , delim2) =
                                     (* String.substring(text,0,curr)^"\""^doubled(String.substring(text,curr+1,String.size(text) -curr-2),0,quotes) *)
                                     
                         else
-                            doubled(text,curr+1,quotes,false)
+                            doubled(text,curr+1,quotes)
                     else
-                        doubled(text,curr+1,quotes,false)
+                        doubled(text,curr+1,quotes)
 
             end
         val liststring1 = lstr(toreplace,0,0)
@@ -176,7 +168,7 @@ fun replacedelim(toreplace , delim1 , delim2) =
         val correct = isCorrect(liststring1)
     in
         (* magic (toreplace,quotes) *)
-        doubled (toreplace,0,0,true)
+        "\""^doubled (toreplace,0,0)
     end
 fun convertDelimiters(infilename , delim1 , outfilename , delim2)= 
     let val textread = read(infilename)
