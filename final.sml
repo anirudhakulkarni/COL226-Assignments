@@ -51,10 +51,10 @@ fun replacedelim(toreplace , delim1 , delim2) =
             true => ""
             | false =>
             let
-                (* val t=Int.toString(curr)
-                val t2=Int.toString(String.size(text)) *)
-                (* val temp2=String.sub(text,curr)
-                val temp1=print(str(temp2)) *)
+                val t=Int.toString(curr)
+                (*val t2=Int.toString(String.size(text)) *)
+                val temp2=String.sub(text,curr)
+                val temp1=print(str(temp2)^t^Int.toString(String.size(text)))
             
             in
             if isStart=true then
@@ -114,10 +114,16 @@ fun replacedelim(toreplace , delim1 , delim2) =
                                     else
                                         String.substring(text,0,curr)^"\"\n\""^doubled(String.substring(text,curr+1,String.size(text) -curr-1),0,quotes,false)
                             else
-                                if String.sub(text,curr-1)= #"\"" then
-                                    text
+                                if curr=0 then
+                                    "\"\n"
                                 else
-                                    String.substring(text,0,curr)^"\"\n\""
+                                    if String.sub(text,curr-1)= #"\"" then
+                                        text
+                                    else
+                                        String.substring(text,0,curr)^"\"\n"
+                                    
+                                    
+                                    
                                     (* String.substring(text,0,curr)^"\""^doubled(String.substring(text,curr+1,String.size(text) -curr-2),0,quotes) *)
                                     
                         else
@@ -214,3 +220,4 @@ fun tsv2csv(infilename , outfilename)=
                     else (String.str(delim2)^ magic (secondpart,quotes+isquote)) else
                 firstchar^ magic (secondpart,quotes+isquote)
             end *)
+            
