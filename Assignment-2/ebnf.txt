@@ -1,0 +1,4 @@
+program ::= statements EOF.
+statement := formula TERM.
+term ::= ";".
+formula ::= CONST | NOT | ANS
