@@ -1,4 +1,5 @@
-program ::= {statement} EOF.
+program ::= statements EOF.
+statments ::= statement statements
 statement := formula TERM.
 formula ::= formula1 (IF formula THEN formula ELSE formula) | formula1.
 formula1 ::= formula2 (formula1 IMPLIES formula1) | formula2.

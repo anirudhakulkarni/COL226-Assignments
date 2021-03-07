@@ -1,0 +1,434 @@
+
+state 0:
+
+	program : . statements 
+	program : .  (reduce by rule 1)
+
+	CONST	shift 11
+	LPAREN	shift 10
+	ID	shift 9
+
+	program	goto 34
+	statement	goto 8
+	statements	goto 7
+	formula	goto 6
+	formula_I	goto 5
+	formula_II	goto 4
+	formula_III	goto 3
+	formula_IV	goto 2
+	formula_V	goto 1
+
+	.	reduce by rule 1
+
+
+state 1:
+
+	formula_IV : formula_V .  (reduce by rule 12)
+
+
+
+	.	reduce by rule 12
+
+
+state 2:
+
+	formula_III : formula_IV . NOT formula_III 
+	formula_III : formula_IV .  (reduce by rule 11)
+
+	NOT	shift 12
+
+
+	.	reduce by rule 11
+
+
+state 3:
+
+	formula_II : formula_III .  (reduce by rule 9)
+
+
+
+	.	reduce by rule 9
+
+
+state 4:
+
+	formula_I : formula_II . formula_I IMPLIES formula_I 
+	formula_I : formula_II .  (reduce by rule 7)
+	formula_II : formula_II . binop formula_II formula_III 
+
+	AND	shift 18
+	OR	shift 17
+	XOR	shift 16
+	EQUALS	shift 15
+	CONST	shift 11
+	LPAREN	shift 10
+	ID	shift 9
+
+	formula_I	goto 14
+	formula_II	goto 4
+	formula_III	goto 3
+	formula_IV	goto 2
+	formula_V	goto 1
+	binop	goto 13
+
+	.	reduce by rule 7
+
+
+state 5:
+
+	formula : formula_I . IF formula THEN formula ELSE formula 
+	formula : formula_I .  (reduce by rule 5)
+
+	IF	shift 19
+
+
+	.	reduce by rule 5
+
+
+state 6:
+
+	statement : formula . TERM 
+
+	TERM	shift 20
+
+
+	.	error
+
+
+state 7:
+
+	program : statements .  (reduce by rule 0)
+
+
+
+	.	reduce by rule 0
+
+
+state 8:
+
+	statements : statement . statements 
+
+	CONST	shift 11
+	LPAREN	shift 10
+	ID	shift 9
+
+	statement	goto 8
+	statements	goto 21
+	formula	goto 6
+	formula_I	goto 5
+	formula_II	goto 4
+	formula_III	goto 3
+	formula_IV	goto 2
+	formula_V	goto 1
+
+	.	error
+
+
+state 9:
+
+	formula_V : ID .  (reduce by rule 15)
+
+
+
+	.	reduce by rule 15
+
+
+state 10:
+
+	formula_IV : LPAREN . formula RPAREN 
+
+	CONST	shift 11
+	LPAREN	shift 10
+	ID	shift 9
+
+	formula	goto 22
+	formula_I	goto 5
+	formula_II	goto 4
+	formula_III	goto 3
+	formula_IV	goto 2
+	formula_V	goto 1
+
+	.	error
+
+
+state 11:
+
+	formula_V : CONST .  (reduce by rule 14)
+
+
+
+	.	reduce by rule 14
+
+
+state 12:
+
+	formula_III : formula_IV NOT . formula_III 
+
+	CONST	shift 11
+	LPAREN	shift 10
+	ID	shift 9
+
+	formula_III	goto 23
+	formula_IV	goto 2
+	formula_V	goto 1
+
+	.	error
+
+
+state 13:
+
+	formula_II : formula_II binop . formula_II formula_III 
+
+	CONST	shift 11
+	LPAREN	shift 10
+	ID	shift 9
+
+	formula_II	goto 24
+	formula_III	goto 3
+	formula_IV	goto 2
+	formula_V	goto 1
+
+	.	error
+
+
+state 14:
+
+	formula_I : formula_II formula_I . IMPLIES formula_I 
+
+	IMPLIES	shift 25
+
+
+	.	error
+
+
+state 15:
+
+	binop : EQUALS .  (reduce by rule 19)
+
+
+
+	.	reduce by rule 19
+
+
+state 16:
+
+	binop : XOR .  (reduce by rule 18)
+
+
+
+	.	reduce by rule 18
+
+
+state 17:
+
+	binop : OR .  (reduce by rule 17)
+
+
+
+	.	reduce by rule 17
+
+
+state 18:
+
+	binop : AND .  (reduce by rule 16)
+
+
+
+	.	reduce by rule 16
+
+
+state 19:
+
+	formula : formula_I IF . formula THEN formula ELSE formula 
+
+	CONST	shift 11
+	LPAREN	shift 10
+	ID	shift 9
+
+	formula	goto 26
+	formula_I	goto 5
+	formula_II	goto 4
+	formula_III	goto 3
+	formula_IV	goto 2
+	formula_V	goto 1
+
+	.	error
+
+
+state 20:
+
+	statement : formula TERM .  (reduce by rule 3)
+
+
+
+	.	reduce by rule 3
+
+
+state 21:
+
+	statements : statement statements .  (reduce by rule 2)
+
+
+
+	.	reduce by rule 2
+
+
+state 22:
+
+	formula_IV : LPAREN formula . RPAREN 
+
+	RPAREN	shift 27
+
+
+	.	error
+
+
+state 23:
+
+	formula_III : formula_IV NOT formula_III .  (reduce by rule 10)
+
+
+
+	.	reduce by rule 10
+
+
+state 24:
+
+	formula_II : formula_II . binop formula_II formula_III 
+	formula_II : formula_II binop formula_II . formula_III 
+
+	AND	shift 18
+	OR	shift 17
+	XOR	shift 16
+	EQUALS	shift 15
+	CONST	shift 11
+	LPAREN	shift 10
+	ID	shift 9
+
+	formula_III	goto 28
+	formula_IV	goto 2
+	formula_V	goto 1
+	binop	goto 13
+
+	.	error
+
+
+state 25:
+
+	formula_I : formula_II formula_I IMPLIES . formula_I 
+
+	CONST	shift 11
+	LPAREN	shift 10
+	ID	shift 9
+
+	formula_I	goto 29
+	formula_II	goto 4
+	formula_III	goto 3
+	formula_IV	goto 2
+	formula_V	goto 1
+
+	.	error
+
+
+state 26:
+
+	formula : formula_I IF formula . THEN formula ELSE formula 
+
+	THEN	shift 30
+
+
+	.	error
+
+
+state 27:
+
+	formula_IV : LPAREN formula RPAREN .  (reduce by rule 13)
+
+
+
+	.	reduce by rule 13
+
+
+state 28:
+
+	formula_II : formula_II binop formula_II formula_III .  (reduce by rule 8)
+
+
+
+	.	reduce by rule 8
+
+
+state 29:
+
+	formula_I : formula_II formula_I IMPLIES formula_I .  (reduce by rule 6)
+
+
+
+	.	reduce by rule 6
+
+
+state 30:
+
+	formula : formula_I IF formula THEN . formula ELSE formula 
+
+	CONST	shift 11
+	LPAREN	shift 10
+	ID	shift 9
+
+	formula	goto 31
+	formula_I	goto 5
+	formula_II	goto 4
+	formula_III	goto 3
+	formula_IV	goto 2
+	formula_V	goto 1
+
+	.	error
+
+
+state 31:
+
+	formula : formula_I IF formula THEN formula . ELSE formula 
+
+	ELSE	shift 32
+
+
+	.	error
+
+
+state 32:
+
+	formula : formula_I IF formula THEN formula ELSE . formula 
+
+	CONST	shift 11
+	LPAREN	shift 10
+	ID	shift 9
+
+	formula	goto 33
+	formula_I	goto 5
+	formula_II	goto 4
+	formula_III	goto 3
+	formula_IV	goto 2
+	formula_V	goto 1
+
+	.	error
+
+
+state 33:
+
+	formula : formula_I IF formula THEN formula ELSE formula .  (reduce by rule 4)
+
+
+
+	.	reduce by rule 4
+
+
+state 34:
+
+
+	EOF	accept
+
+
+	.	error
+
+28 of 84 action table entries left after compaction
+63 goto table entries
