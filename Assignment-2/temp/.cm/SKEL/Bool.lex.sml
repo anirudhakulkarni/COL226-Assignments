@@ -1,0 +1,2 @@
+Skeleton 5
+ae"BoolLexFun"i2aä¢Tokens"gp1c"Bool_TOKENS"f4d"Char"ä¢Vector"d"Int"ä¢TextIO"h3aä¢yyInput"jh3aä¢TIO"gp1ÿad"TSIO"gp2ÿd"StreamIO"ad"TPIO"gp1d"TextPrimIO"h0aä¢UserDeclarations"h1aÿgp1ÿbbd2egp1ÿ‚f6d"List"Cÿ4d"IO"ÿ‚ÿÿNf0f1ÿ

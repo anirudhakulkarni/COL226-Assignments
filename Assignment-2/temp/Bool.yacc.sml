@@ -15,30 +15,27 @@ structure Token = Token
 local open LrTable in 
 val table=let val actionRows =
 "\
-\\001\000\001\000\016\000\002\000\015\000\003\000\014\000\004\000\013\000\
-\\005\000\012\000\013\000\011\000\000\000\
-\\001\000\001\000\016\000\002\000\015\000\003\000\014\000\004\000\013\000\
-\\008\000\024\000\013\000\011\000\000\000\
-\\001\000\001\000\016\000\002\000\015\000\003\000\014\000\004\000\013\000\
-\\009\000\026\000\013\000\011\000\000\000\
-\\001\000\001\000\016\000\002\000\015\000\003\000\014\000\004\000\013\000\
-\\011\000\023\000\013\000\011\000\000\000\
+\\001\000\001\000\015\000\002\000\014\000\003\000\013\000\004\000\012\000\
+\\005\000\011\000\013\000\010\000\000\000\
+\\001\000\001\000\015\000\002\000\014\000\003\000\013\000\004\000\012\000\
+\\008\000\026\000\013\000\010\000\000\000\
+\\001\000\001\000\015\000\002\000\014\000\003\000\013\000\004\000\012\000\
+\\009\000\028\000\013\000\010\000\000\000\
+\\001\000\001\000\015\000\002\000\014\000\003\000\013\000\004\000\012\000\
+\\011\000\025\000\013\000\010\000\000\000\
 \\001\000\006\000\009\000\007\000\008\000\010\000\007\000\012\000\006\000\
 \\014\000\005\000\000\000\
 \\001\000\015\000\000\000\000\000\
-\\029\000\000\000\
-\\030\000\006\000\009\000\007\000\008\000\010\000\007\000\012\000\006\000\
-\\014\000\005\000\000\000\
 \\031\000\000\000\
 \\032\000\006\000\009\000\007\000\008\000\010\000\007\000\012\000\006\000\
 \\014\000\005\000\000\000\
-\\033\000\001\000\016\000\002\000\015\000\003\000\014\000\004\000\013\000\
-\\013\000\011\000\000\000\
-\\034\000\001\000\016\000\002\000\015\000\003\000\014\000\004\000\013\000\
-\\013\000\011\000\000\000\
-\\035\000\001\000\016\000\002\000\015\000\003\000\014\000\004\000\013\000\
-\\013\000\011\000\000\000\
-\\036\000\000\000\
+\\033\000\000\000\
+\\034\000\006\000\009\000\007\000\008\000\010\000\007\000\012\000\006\000\
+\\014\000\005\000\000\000\
+\\035\000\001\000\015\000\002\000\014\000\003\000\013\000\004\000\012\000\
+\\013\000\010\000\000\000\
+\\036\000\001\000\015\000\002\000\014\000\003\000\013\000\004\000\012\000\
+\\013\000\010\000\000\000\
 \\037\000\000\000\
 \\038\000\000\000\
 \\039\000\000\000\
@@ -46,47 +43,51 @@ val table=let val actionRows =
 \\041\000\000\000\
 \\042\000\000\000\
 \\043\000\000\000\
+\\044\000\000\000\
 \"
 val actionRowNumbers =
 "\007\000\000\000\006\000\004\000\
-\\016\000\004\000\004\000\015\000\
-\\004\000\004\000\009\000\020\000\
-\\019\000\018\000\017\000\013\000\
-\\003\000\001\000\012\000\011\000\
-\\008\000\014\000\004\000\002\000\
-\\004\000\010\000\005\000"
+\\019\000\004\000\004\000\018\000\
+\\004\000\009\000\004\000\004\000\
+\\004\000\004\000\016\000\003\000\
+\\001\000\011\000\008\000\015\000\
+\\014\000\013\000\012\000\017\000\
+\\004\000\002\000\004\000\010\000\
+\\005\000"
 val gotoT =
 "\
-\\001\000\026\000\002\000\002\000\003\000\001\000\000\000\
-\\004\000\008\000\000\000\
+\\001\000\028\000\002\000\002\000\003\000\001\000\000\000\
+\\000\000\
+\\000\000\
+\\003\000\014\000\000\000\
 \\000\000\
 \\003\000\015\000\000\000\
-\\000\000\
 \\003\000\016\000\000\000\
+\\000\000\
 \\003\000\017\000\000\000\
-\\000\000\
-\\003\000\018\000\000\000\
+\\002\000\018\000\003\000\001\000\000\000\
 \\003\000\019\000\000\000\
-\\002\000\020\000\003\000\001\000\000\000\
+\\003\000\020\000\000\000\
+\\003\000\021\000\000\000\
+\\003\000\022\000\000\000\
 \\000\000\
 \\000\000\
 \\000\000\
 \\000\000\
-\\004\000\008\000\000\000\
-\\004\000\008\000\000\000\
-\\004\000\008\000\000\000\
-\\004\000\008\000\000\000\
-\\004\000\008\000\000\000\
 \\000\000\
 \\000\000\
-\\003\000\023\000\000\000\
-\\004\000\008\000\000\000\
+\\000\000\
+\\000\000\
+\\000\000\
+\\000\000\
 \\003\000\025\000\000\000\
-\\004\000\008\000\000\000\
+\\000\000\
+\\003\000\027\000\000\000\
+\\000\000\
 \\000\000\
 \"
-val numstates = 27
-val numrules = 15
+val numstates = 29
+val numrules = 14
 val s = ref "" and index = ref 0
 val string_to_int = fn () => 
 let val i = !index
@@ -156,8 +157,8 @@ datatype svalue = VOID | ntVOID of unit ->  unit
  | CONST of unit ->  (string) | TERM of unit ->  (string)
  | EQUALS of unit ->  (string) | XOR of unit ->  (string)
  | OR of unit ->  (string) | AND of unit ->  (string)
- | binop of unit ->  (string) | formula of unit ->  (string)
- | statement of unit ->  (string) | program of unit ->  (string)
+ | formula of unit ->  (string) | statement of unit ->  (string)
+ | program of unit ->  (string)
 end
 type svalue = MlyValue.svalue
 type result = string
@@ -207,13 +208,13 @@ case (i392,stack)
 of  ( 0, ( ( _, ( MlyValue.statement statement1, statement1left, 
 statement1right)) :: rest671)) => let val  result = MlyValue.program
  (fn _ => let val  (statement as statement1) = statement1 ()
- in (statement)
+ in (statement^"<statements>, <program>")
 end)
  in ( LrTable.NT 0, ( result, statement1left, statement1right), 
 rest671)
 end
 |  ( 1, ( rest671)) => let val  result = MlyValue.program (fn _ => (
- ""))
+ "<program>"))
  in ( LrTable.NT 0, ( result, defaultPos, defaultPos), rest671)
 end
 |  ( 2, ( ( _, ( MlyValue.statement statement1, _, statement1right))
@@ -223,7 +224,9 @@ MlyValue.statement (fn _ => let val  (formula as formula1) = formula1
  ()
  val  (TERM as TERM1) = TERM1 ()
  val  (statement as statement1) = statement1 ()
- in ("FORMULA "^formula^TERM^statement)
+ in (
+formula^", <formula>, "^TERM^", <TERM>, "^statement^", <statement>, ")
+
 end)
  in ( LrTable.NT 1, ( result, formula1left, statement1right), rest671)
 
@@ -233,7 +236,7 @@ MlyValue.formula formula1, formula1left, _)) :: rest671)) => let val
 result = MlyValue.statement (fn _ => let val  (formula as formula1) = 
 formula1 ()
  val  (TERM as TERM1) = TERM1 ()
- in ("FORMULA "^formula^TERM)
+ in (formula^", <formula>, "^TERM^", <TERM>, ")
 end)
  in ( LrTable.NT 1, ( result, formula1left, TERM1right), rest671)
 end
@@ -264,26 +267,59 @@ end)
 
 end
 |  ( 6, ( ( _, ( MlyValue.formula formula2, _, formula2right)) :: ( _,
- ( MlyValue.binop binop1, _, _)) :: ( _, ( MlyValue.formula formula1, 
+ ( MlyValue.AND AND1, _, _)) :: ( _, ( MlyValue.formula formula1, 
 formula1left, _)) :: rest671)) => let val  result = MlyValue.formula
  (fn _ => let val  formula1 = formula1 ()
- val  (binop as binop1) = binop1 ()
+ val  (AND as AND1) = AND1 ()
  val  formula2 = formula2 ()
- in (formula1^binop^formula2)
+ in (formula1^AND^formula2)
 end)
  in ( LrTable.NT 2, ( result, formula1left, formula2right), rest671)
 
 end
-|  ( 7, ( ( _, ( MlyValue.formula formula1, _, formula1right)) :: ( _,
- ( MlyValue.NOT NOT1, NOT1left, _)) :: rest671)) => let val  result = 
-MlyValue.formula (fn _ => let val  (NOT as NOT1) = NOT1 ()
+|  ( 7, ( ( _, ( MlyValue.formula formula2, _, formula2right)) :: ( _,
+ ( MlyValue.OR OR1, _, _)) :: ( _, ( MlyValue.formula formula1, 
+formula1left, _)) :: rest671)) => let val  result = MlyValue.formula
+ (fn _ => let val  formula1 = formula1 ()
+ val  (OR as OR1) = OR1 ()
+ val  formula2 = formula2 ()
+ in (formula1^OR^formula2)
+end)
+ in ( LrTable.NT 2, ( result, formula1left, formula2right), rest671)
+
+end
+|  ( 8, ( ( _, ( MlyValue.formula formula2, _, formula2right)) :: ( _,
+ ( MlyValue.XOR XOR1, _, _)) :: ( _, ( MlyValue.formula formula1, 
+formula1left, _)) :: rest671)) => let val  result = MlyValue.formula
+ (fn _ => let val  formula1 = formula1 ()
+ val  (XOR as XOR1) = XOR1 ()
+ val  formula2 = formula2 ()
+ in (formula1^XOR^formula2)
+end)
+ in ( LrTable.NT 2, ( result, formula1left, formula2right), rest671)
+
+end
+|  ( 9, ( ( _, ( MlyValue.formula formula2, _, formula2right)) :: ( _,
+ ( MlyValue.EQUALS EQUALS1, _, _)) :: ( _, ( MlyValue.formula formula1
+, formula1left, _)) :: rest671)) => let val  result = MlyValue.formula
+ (fn _ => let val  formula1 = formula1 ()
+ val  (EQUALS as EQUALS1) = EQUALS1 ()
+ val  formula2 = formula2 ()
+ in (formula1^EQUALS^formula2)
+end)
+ in ( LrTable.NT 2, ( result, formula1left, formula2right), rest671)
+
+end
+|  ( 10, ( ( _, ( MlyValue.formula formula1, _, formula1right)) :: ( _
+, ( MlyValue.NOT NOT1, NOT1left, _)) :: rest671)) => let val  result =
+ MlyValue.formula (fn _ => let val  (NOT as NOT1) = NOT1 ()
  val  (formula as formula1) = formula1 ()
  in ( NOT^formula)
 end)
  in ( LrTable.NT 2, ( result, NOT1left, formula1right), rest671)
 end
-|  ( 8, ( ( _, ( MlyValue.RPAREN RPAREN1, _, RPAREN1right)) :: ( _, ( 
-MlyValue.formula formula1, _, _)) :: ( _, ( MlyValue.LPAREN LPAREN1, 
+|  ( 11, ( ( _, ( MlyValue.RPAREN RPAREN1, _, RPAREN1right)) :: ( _, (
+ MlyValue.formula formula1, _, _)) :: ( _, ( MlyValue.LPAREN LPAREN1, 
 LPAREN1left, _)) :: rest671)) => let val  result = MlyValue.formula
  (fn _ => let val  (LPAREN as LPAREN1) = LPAREN1 ()
  val  (formula as formula1) = formula1 ()
@@ -292,47 +328,19 @@ LPAREN1left, _)) :: rest671)) => let val  result = MlyValue.formula
 end)
  in ( LrTable.NT 2, ( result, LPAREN1left, RPAREN1right), rest671)
 end
-|  ( 9, ( ( _, ( MlyValue.CONST CONST1, CONST1left, CONST1right)) :: 
+|  ( 12, ( ( _, ( MlyValue.CONST CONST1, CONST1left, CONST1right)) :: 
 rest671)) => let val  result = MlyValue.formula (fn _ => let val  (
 CONST as CONST1) = CONST1 ()
- in (CONST)
+ in (CONST^", <CONST>")
 end)
  in ( LrTable.NT 2, ( result, CONST1left, CONST1right), rest671)
 end
-|  ( 10, ( ( _, ( MlyValue.ID ID1, ID1left, ID1right)) :: rest671)) =>
+|  ( 13, ( ( _, ( MlyValue.ID ID1, ID1left, ID1right)) :: rest671)) =>
  let val  result = MlyValue.formula (fn _ => let val  (ID as ID1) = 
 ID1 ()
- in (ID)
+ in (ID^", <ID>")
 end)
  in ( LrTable.NT 2, ( result, ID1left, ID1right), rest671)
-end
-|  ( 11, ( ( _, ( MlyValue.AND AND1, AND1left, AND1right)) :: rest671)
-) => let val  result = MlyValue.binop (fn _ => let val  (AND as AND1)
- = AND1 ()
- in (AND)
-end)
- in ( LrTable.NT 3, ( result, AND1left, AND1right), rest671)
-end
-|  ( 12, ( ( _, ( MlyValue.OR OR1, OR1left, OR1right)) :: rest671)) =>
- let val  result = MlyValue.binop (fn _ => let val  (OR as OR1) = OR1
- ()
- in (OR)
-end)
- in ( LrTable.NT 3, ( result, OR1left, OR1right), rest671)
-end
-|  ( 13, ( ( _, ( MlyValue.XOR XOR1, XOR1left, XOR1right)) :: rest671)
-) => let val  result = MlyValue.binop (fn _ => let val  (XOR as XOR1)
- = XOR1 ()
- in (XOR)
-end)
- in ( LrTable.NT 3, ( result, XOR1left, XOR1right), rest671)
-end
-|  ( 14, ( ( _, ( MlyValue.EQUALS EQUALS1, EQUALS1left, EQUALS1right))
- :: rest671)) => let val  result = MlyValue.binop (fn _ => let val  (
-EQUALS as EQUALS1) = EQUALS1 ()
- in (EQUALS)
-end)
- in ( LrTable.NT 3, ( result, EQUALS1left, EQUALS1right), rest671)
 end
 | _ => raise (mlyAction i392)
 end

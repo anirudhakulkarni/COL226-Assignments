@@ -1,0 +1,9 @@
+Group is
+    $/basis.cm
+    $/smlnj-lib.cm
+    $/ml-yacc-lib.cm
+    Bool.lex
+    yacc : suffix(mlyacc)
+    Bool.yacc
+    
+    load-Bool.sml

@@ -13,7 +13,6 @@
 %nonterm program of string 
     | statement of string 
     | formula of string
-    | binop of string
 %pos int
 %eop EOF
 %noshift EOF
@@ -27,12 +26,14 @@
 
 %%
 
-program : statement (statement) | ( "")
-statement : formula TERM statement ("FORMULA "^formula^TERM^statement) | formula TERM ("FORMULA "^formula^TERM)
+program : statement (statement^"<statements>, <program>") | ( "<program>")
+statement : formula TERM statement (formula^", <formula>, "^TERM^", <TERM>, "^statement^", <statement>, ") | formula TERM (formula^", <formula>, "^TERM^", <TERM>, ")
 formula: IF formula THEN formula ELSE formula (formula3^ELSE^formula2^THEN^formula1^IF)
     | formula IMPLIES formula ( formula1^IMPLIES^formula2)
-    | formula binop formula (formula1^binop^formula2)
+    | formula AND formula (formula1^AND^formula2)
+    | formula OR formula (formula1^OR^formula2)
+    | formula XOR formula (formula1^XOR^formula2)
+    | formula EQUALS formula (formula1^EQUALS^formula2)
     | NOT formula ( NOT^formula)
     | LPAREN formula RPAREN (LPAREN^formula^RPAREN)
-    | CONST (CONST) | ID (ID)
-binop: AND (AND) | OR (OR) | XOR (XOR)| EQUALS (EQUALS)
+    | CONST (CONST^", <CONST>") | ID (ID^", <ID>")

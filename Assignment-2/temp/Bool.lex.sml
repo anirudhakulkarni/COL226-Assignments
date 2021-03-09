@@ -11,7 +11,6 @@ type lexresult = (svalue, pos) token
 val pos = ref 0
 val lin = ref 1;
 val col = ref 0;
-
 val eof = fn () => Tokens.EOF(!pos, !pos)
 val error = fn (e, l:int, _) => TextIO.output(TextIO.stdOut,"line " ^ (Int.toString l) ^ ": " ^ e ^ "\n")
 
@@ -462,6 +461,8 @@ end
 
 fun makeLexer yyinput =
 let	val yygone0=1
+	val yylineno = ref 0
+
 	val yyb = ref "\n" 		(* buffer *)
 	val yybl = ref 1		(*buffer length *)
 	val yybufpos = ref 1		(* location of next character to use *)
@@ -482,28 +483,30 @@ let fun continue() = lex() in
 		    Internal.N yyk => 
 			(let fun yymktext() = String.substring(!yyb,i0,i-i0)
 			     val yypos = i0+ !yygone
+			val _ = yylineno := CharVectorSlice.foldli
+				(fn (_,#"\n", n) => n+1 | (_,_, n) => n) (!yylineno) (CharVectorSlice.slice (!yyb,i0,SOME(i-i0)))
 			open UserDeclarations Internal.StartStates
  in (yybufpos := i; case yyk of 
 
 			(* Application actions *)
 
   1 => (pos := (!pos) + 1; lex())
-| 11 => let val yytext=yymktext() in Tokens.CONST(yytext, yypos, yypos+size yytext) end
-| 17 => let val yytext=yymktext() in Tokens.CONST(yytext, yypos, yypos+size yytext) end
-| 21 => let val yytext=yymktext() in Tokens.AND(yytext, yypos, yypos+size yytext) end
-| 24 => let val yytext=yymktext() in Tokens.OR(yytext, yypos, yypos+size yytext) end
-| 28 => let val yytext=yymktext() in Tokens.XOR(yytext, yypos, yypos+size yytext) end
-| 35 => let val yytext=yymktext() in Tokens.EQUALS(yytext, yypos, yypos+size yytext) end
-| 39 => let val yytext=yymktext() in Tokens.NOT(yytext, yypos, yypos+size yytext) end
+| 11 => let val yytext=yymktext() in print("CONST \""^yytext^"\", ");Tokens.CONST(yytext, yypos, yypos+size yytext) end
+| 17 => let val yytext=yymktext() in print("CONST \""^yytext^"\", ");Tokens.CONST(yytext, yypos, yypos+size yytext) end
+| 21 => let val yytext=yymktext() in print("AND \""^yytext^"\", ");Tokens.AND(yytext, yypos, yypos+size yytext) end
+| 24 => let val yytext=yymktext() in print("OR \""^yytext^"\", ");Tokens.OR(yytext, yypos, yypos+size yytext) end
+| 28 => let val yytext=yymktext() in print("XOR \""^yytext^"\", ");Tokens.XOR(yytext, yypos, yypos+size yytext) end
+| 35 => let val yytext=yymktext() in print("EQUALS \""^yytext^"\", ");Tokens.EQUALS(yytext, yypos, yypos+size yytext) end
+| 39 => let val yytext=yymktext() in print("NOT \""^yytext^"\", ");Tokens.NOT(yytext, yypos, yypos+size yytext) end
 | 4 => (lex())
-| 47 => let val yytext=yymktext() in Tokens.IMPLIES(yytext, yypos, yypos+size yytext) end
-| 50 => let val yytext=yymktext() in Tokens.IF(yytext, yypos, yypos+size yytext) end
-| 55 => let val yytext=yymktext() in Tokens.THEN(yytext, yypos, yypos+size yytext) end
-| 6 => let val yytext=yymktext() in Tokens.TERM(yytext, yypos, yypos+size yytext) end
-| 60 => let val yytext=yymktext() in Tokens.ELSE(yytext, yypos, yypos+size yytext) end
-| 62 => let val yytext=yymktext() in Tokens.LPAREN(yytext, yypos, yypos+size yytext) end
-| 64 => let val yytext=yymktext() in Tokens.RPAREN(yytext, yypos, yypos+size yytext) end
-| 67 => let val yytext=yymktext() in Tokens.ID(yytext, yypos, yypos+size yytext) end
+| 47 => let val yytext=yymktext() in print("IMPLIES \""^yytext^"\", ");Tokens.IMPLIES(yytext, yypos, yypos+size yytext) end
+| 50 => let val yytext=yymktext() in print("IF \""^yytext^"\", ");Tokens.IF(yytext, yypos, 0) end
+| 55 => let val yytext=yymktext() in print("THEN \""^yytext^"\", ");Tokens.THEN(yytext, yypos, yypos+size yytext) end
+| 6 => let val yytext=yymktext() in print("TERM \""^yytext^"\", ");Tokens.TERM(yytext, yypos, yypos+size yytext) end
+| 60 => let val yytext=yymktext() in print("ELSE \""^yytext^"\", ");Tokens.ELSE(yytext, yypos, yypos+size yytext) end
+| 62 => let val yytext=yymktext() in print("LPAREN \""^yytext^"\", ");Tokens.LPAREN(yytext, yypos, yypos+size yytext) end
+| 64 => let val yytext=yymktext() in print("RPAREN \""^yytext^"\", ");Tokens.RPAREN(yytext, yypos, yypos+size yytext) end
+| 67 => let val yytext=yymktext() in print("ID \""^yytext^"\", ");Tokens.ID(yytext, yypos, yypos+size yytext) end
 | _ => raise Internal.LexerError
 
 		) end )
