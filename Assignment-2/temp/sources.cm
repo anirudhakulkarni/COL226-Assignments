@@ -5,5 +5,4 @@ Group is
     Bool.lex
     yacc : suffix(mlyacc)
     Bool.yacc
-    
     load-Bool.sml

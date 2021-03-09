@@ -6,8 +6,8 @@ structure BoolParser =
      	       structure Lex = BoolLex)
      
 fun invoke lexstream =
-    	     	let fun print_error (s,pos:int,line) =
-		    	TextIO.output(TextIO.stdOut, "Error, line " ^ (Int.toString s) ^ "," ^ s ^ "\n")
+    	     	let fun print_error (s,pos,lin) =
+		    	TextIO.output(TextIO.stdOut, "Error, line " ^ (Int.toString lin)^" at letter number "^(Int.toString pos) ^ "," ^ s ^ "\n")
 		in
 		    BoolParser.parse(0,lexstream,print_error,())
 		end
@@ -34,8 +34,13 @@ fun parseFile filename =
     let val file = TextIO.openIn filename
         val textread = TextIO.inputAll file
         val _ = TextIO.closeIn file
+		(* val _ = print textread *)
 		val parsedData = parseString textread
 		val _ = print("\n")
     in 
 		parsedData
     end
+val args = CommandLine.arguments()
+val name =hd args
+val _= parseFile name
+val _ = OS.Process.exit(OS.Process.success)

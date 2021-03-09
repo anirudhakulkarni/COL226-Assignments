@@ -9,10 +9,10 @@ type ('a,'b) token = ('a,'b) Tokens.token
 type lexresult = (svalue, pos) token
 
 val pos = ref 0
-val lin = ref 1;
-val col = ref 0;
+val lineno = ref 0
+val row = ref 1
 val eof = fn () => Tokens.EOF(!pos, !pos)
-val error = fn (e, l:int, _) => TextIO.output(TextIO.stdOut,"line " ^ (Int.toString l) ^ ": " ^ e ^ "\n")
+val error = fn (e, pos, lineno) => TextIO.output(TextIO.stdOut, "FUCK Error, line " ^ (Int.toString lineno)^" at letter number "^(Int.toString pos) ^ "," ^ e ^ "\n")
 
 
 end (* end of user routines *)
@@ -443,8 +443,8 @@ in Vector.fromList(List.map g
 {fin = [(N 6)], trans = 0},
 {fin = [(N 64)], trans = 0},
 {fin = [(N 62)], trans = 0},
-{fin = [(N 4)], trans = 47},
-{fin = [(N 1)], trans = 0}])
+{fin = [(N 2)], trans = 47},
+{fin = [(N 4)], trans = 0}])
 end
 structure StartStates =
 	struct
@@ -490,23 +490,23 @@ let fun continue() = lex() in
 
 			(* Application actions *)
 
-  1 => (pos := (!pos) + 1; lex())
-| 11 => let val yytext=yymktext() in print("CONST \""^yytext^"\", ");Tokens.CONST(yytext, yypos, yypos+size yytext) end
-| 17 => let val yytext=yymktext() in print("CONST \""^yytext^"\", ");Tokens.CONST(yytext, yypos, yypos+size yytext) end
-| 21 => let val yytext=yymktext() in print("AND \""^yytext^"\", ");Tokens.AND(yytext, yypos, yypos+size yytext) end
-| 24 => let val yytext=yymktext() in print("OR \""^yytext^"\", ");Tokens.OR(yytext, yypos, yypos+size yytext) end
-| 28 => let val yytext=yymktext() in print("XOR \""^yytext^"\", ");Tokens.XOR(yytext, yypos, yypos+size yytext) end
-| 35 => let val yytext=yymktext() in print("EQUALS \""^yytext^"\", ");Tokens.EQUALS(yytext, yypos, yypos+size yytext) end
-| 39 => let val yytext=yymktext() in print("NOT \""^yytext^"\", ");Tokens.NOT(yytext, yypos, yypos+size yytext) end
-| 4 => (lex())
-| 47 => let val yytext=yymktext() in print("IMPLIES \""^yytext^"\", ");Tokens.IMPLIES(yytext, yypos, yypos+size yytext) end
-| 50 => let val yytext=yymktext() in print("IF \""^yytext^"\", ");Tokens.IF(yytext, yypos, 0) end
-| 55 => let val yytext=yymktext() in print("THEN \""^yytext^"\", ");Tokens.THEN(yytext, yypos, yypos+size yytext) end
-| 6 => let val yytext=yymktext() in print("TERM \""^yytext^"\", ");Tokens.TERM(yytext, yypos, yypos+size yytext) end
-| 60 => let val yytext=yymktext() in print("ELSE \""^yytext^"\", ");Tokens.ELSE(yytext, yypos, yypos+size yytext) end
-| 62 => let val yytext=yymktext() in print("LPAREN \""^yytext^"\", ");Tokens.LPAREN(yytext, yypos, yypos+size yytext) end
-| 64 => let val yytext=yymktext() in print("RPAREN \""^yytext^"\", ");Tokens.RPAREN(yytext, yypos, yypos+size yytext) end
-| 67 => let val yytext=yymktext() in print("ID \""^yytext^"\", ");Tokens.ID(yytext, yypos, yypos+size yytext) end
+  11 => let val yytext=yymktext() in print("CONST \""^yytext^"\", ");Tokens.CONST(yytext, (!row), (!lineno)) end
+| 17 => let val yytext=yymktext() in print("CONST \""^yytext^"\", ");Tokens.CONST(yytext, (!row), (!lineno)) end
+| 2 => (row:=(!row)+1;lex())
+| 21 => let val yytext=yymktext() in print("AND \""^yytext^"\", ");Tokens.AND(yytext, (!row), (!lineno)) end
+| 24 => let val yytext=yymktext() in print("OR \""^yytext^"\", ");Tokens.OR(yytext, (!row), (!lineno)) end
+| 28 => let val yytext=yymktext() in print("XOR \""^yytext^"\", ");Tokens.XOR(yytext, (!row), (!lineno)) end
+| 35 => let val yytext=yymktext() in print("EQUALS \""^yytext^"\", ");Tokens.EQUALS(yytext, (!row), (!lineno)) end
+| 39 => let val yytext=yymktext() in print("NOT \""^yytext^"\", ");Tokens.NOT(yytext, (!row), (!lineno)) end
+| 4 => (lineno:=(!lineno)+1;row:=1;lex())
+| 47 => let val yytext=yymktext() in print("IMPLIES \""^yytext^"\", ");Tokens.IMPLIES(yytext, (!row), (!lineno)) end
+| 50 => let val yytext=yymktext() in print("IF \""^yytext^"\", ");Tokens.IF(yytext, (!row), (!lineno)) end
+| 55 => let val yytext=yymktext() in print("THEN \""^yytext^"\", ");Tokens.THEN(yytext, (!row), (!lineno)) end
+| 6 => let val yytext=yymktext() in print("TERM \""^yytext^"\", ");Tokens.TERM(yytext, (!row), (!lineno)) end
+| 60 => let val yytext=yymktext() in print("ELSE \""^yytext^"\", ");Tokens.ELSE(yytext, (!row), (!lineno)) end
+| 62 => let val yytext=yymktext() in print("LPAREN \""^yytext^"\", ");Tokens.LPAREN(yytext, (!row), (!lineno)) end
+| 64 => let val yytext=yymktext() in print("RPAREN \""^yytext^"\", ");Tokens.RPAREN(yytext, (!row), (!lineno)) end
+| 67 => let val yytext=yymktext() in print("ID \""^yytext^"\", ");Tokens.ID(yytext, (!row), (!lineno)) end
 | _ => raise Internal.LexerError
 
 		) end )

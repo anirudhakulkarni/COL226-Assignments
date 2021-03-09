@@ -1,2 +1,2 @@
 Skeleton 5
-d4f2d"Int"d"TextIO"aä¢BoolLrVals"jh1aä¢Token"gp2ä¢LrParser"ÿ%gp1e"BoolLrValsFun"aä¢BoolLex"jh1aä¢Tokens"gp2ÿÿgp1e"BoolLexFun"ad"BoolParser"jh3aÿ0gp1ÿ0aä¢ParserData"gp2ÿÿ‚ad"Lex"gp1ÿgp1e"Join"
+d4f4d"OS"d"Int"d"TextIO"d"CommandLine"aä¢BoolLrVals"jh1aä¢Token"gp2ä¢LrParser"ÿ8gp1e"BoolLrValsFun"aä¢BoolLex"jh1aä¢Tokens"gp2ÿ'ÿ2gp1e"BoolLexFun"ad"BoolParser"jh3aÿgp1ÿaä¢ParserData"gp2ÿ'ÿ‚/ad"Lex"gp1ÿ$gp1e"Join"

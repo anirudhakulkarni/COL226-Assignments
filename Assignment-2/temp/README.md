@@ -6,10 +6,12 @@ To run type:
 make run
 ```
 
-This will open smlnj interactive environment where you can give custom file name as input
+This will create executable by name a2
+
+Run the executable by
 
 ```bash
-parseFile "filename"
+./a2 "filename"
 ```
 
 this will print 2 lines.
@@ -17,3 +19,5 @@ this will print 2 lines.
 First will be tokens identified
 
 Second will be postorder traversal of tree
+
+In case of errors extra lines with type of error and location of error is printed
