@@ -66,7 +66,7 @@ IF x EQUALS TRUE THEN TRUE ELSE a IMPLIES B XOR b;
 
 #### Manual Parse tree checking:
 
-![working shown on paper](index.png)
+![working shown on paper](image/README/index.png)
 
 ```bash
 A AND B;
