@@ -1,6 +1,6 @@
 # Assignemnt - 2
 
-To run type:
+### To run type:
 
 ```bash
 make run
@@ -14,19 +14,13 @@ Run the executable by
 ./a2 "filename"
 ```
 
-this will print 2 lines.
-
-First will be tokens identified
-
-Second will be postorder traversal of tree
-
-In case of errors extra lines with type of error and location of error is printed
-
-Terminals : without quotes or angular brackerts
-
-Non-terminals : with angular brackets
-
-Actual value of token : with double quotes
+- this will print 2 lines.
+- First will be tokens identified
+- Second will be postorder traversal of tree
+- In case of errors extra lines with type of error and location of error is printed
+- Terminals : without quotes or angular brackerts
+- Non-terminals : with angular brackets
+- Actual value of token : with double quotes
 
 ### Test Cases:
 
@@ -61,9 +55,18 @@ lexer error produces location of error message:
 
 #### Large input:
 
+```bash
+IF x EQUALS TRUE THEN TRUE ELSE a IMPLIES B XOR b;
+```
+
+```bash
+[ IF "IF", ID "x", EQUALS "EQUALS", CONST "TRUE", THEN "THEN", CONST "TRUE", ELSE "ELSE", ID "a", IMPLIES "IMPLIES", ID "B", XOR "XOR", ID "b", TERM ";", ]
+"IF", IF, "x", <ID>, <formula>, "EQUALS", EQUALS, "TRUE", <CONST>, <formula>, <formula>, "THEN", THEN, "TRUE", <CONST>, <formula>, "ELSE", ELSE, "x", <ID>, <formula>, "EQUALS", EQUALS, "TRUE", <CONST>, <formula>, <formula>, <formula>, ";", <TERM>, <statement>, <program>
+```
+
 #### Manual Parse tree checking:
 
-![](!image/README/index.jpeg)
+![working shown on paper](index.png)
 
 ```bash
 A AND B;
@@ -75,3 +78,14 @@ A AND B;
 ```
 
 Which matches with the tree generated
+
+#### Assignment test case:
+
+```bash
+(xyz IMPLIES FALSE) OR TRUE AND IF A THEN b ELSE c;
+```
+
+```bash
+[ LPAREN "(", ID "xyz", IMPLIES "IMPLIES", CONST "FALSE", RPAREN ")", OR "OR", CONST "TRUE", AND "AND", IF "IF", ID "A", THEN "THEN", ID "b", ELSE "ELSE", ID "c", TERM ";", ]
+"(", LPAREN, "xyz", <ID>, <formula>, IMPLIES, "FALSE", <CONST>, <formula>, RPAREN, )", <formula>, "OR", OR, "TRUE", <CONST>, <formula>, <formula>, "AND", AND, "IF", IF, "A", <ID>, <formula>, "THEN", THEN, "b", <ID>, <formula>, "ELSE", ELSE, "A", <ID>, <formula>, <formula>, <formula>, ";", <TERM>, <statement>, <program>
+```
