@@ -7,7 +7,8 @@ structure BoolParser =
      
 fun invoke lexstream =
     	     	let fun print_error (s,pos,lin) =
-		    	TextIO.output(TextIO.stdOut, "Error, line " ^ (Int.toString lin)^" at letter number "^(Int.toString pos) ^ "," ^ s ^ "\n")
+		    	TextIO.output(TextIO.stdOut, "\nSyntax Error:" ^ (Int.toString lin)^":"^(Int.toString (pos+1)) ^ ":" ^ String.extract(s,13,NONE) ^ "\n")
+			
 		in
 		    BoolParser.parse(0,lexstream,print_error,())
 		end
@@ -35,7 +36,11 @@ fun parseFile filename =
         val textread = TextIO.inputAll file
         val _ = TextIO.closeIn file
 		(* val _ = print textread *)
+		val _ = print("[ ")
 		val parsedData = parseString textread
+		val _ = print("]")
+		val _ = print("\n")
+		val _ = print parsedData
 		val _ = print("\n")
     in 
 		parsedData
