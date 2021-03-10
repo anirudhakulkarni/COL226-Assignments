@@ -63,7 +63,7 @@ lexer error produces location of error message:
 
 #### Manual Parse tree checking:
 
-![](!./image/README/index.jpeg)
+![](!image/README/index.jpeg)
 
 ```bash
 A AND B;
