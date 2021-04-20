@@ -252,7 +252,7 @@ formula1, _, _)) :: ( _, ( MlyValue.IF IF1, IF1left, _)) :: rest671))
  val  (ELSE as ELSE1) = ELSE1 ()
  val  formula3 = formula3 ()
  in (
- "\""^IF^"\", IF, "^formula1^", <formula>, \""^THEN^"\", THEN, "^formula2^", <formula>, \""^ELSE^"\", ELSE, "^formula1^", <formula>"
+ "\""^IF^"\", IF, "^formula1^", <formula>, \""^THEN^"\", THEN, "^formula2^", <formula>, \""^ELSE^"\", ELSE, "^formula3^", <formula>"
 )
 end)
  in ( LrTable.NT 2, ( result, IF1left, formula3right), rest671)
