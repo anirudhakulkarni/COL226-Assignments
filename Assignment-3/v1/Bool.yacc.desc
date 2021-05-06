@@ -608,6 +608,7 @@ state 33:
 	EXP : EXP . DIV EXP 
 	EXP : EXP . EQ EXP 
 
+	TIMES	shift 17
 	DIV	shift 12
 
 
@@ -668,7 +669,6 @@ state 36:
 	EXP : EXP . DIV EXP 
 	EXP : EXP . EQ EXP 
 
-	DIV	shift 12
 
 
 	.	reduce by rule 17
@@ -689,6 +689,7 @@ state 37:
 	EXP : EXP . DIV EXP 
 	EXP : EXP . EQ EXP 
 
+	TIMES	shift 17
 	DIV	shift 12
 
 
@@ -710,6 +711,7 @@ state 38:
 	EXP : EXP . DIV EXP 
 	EXP : EXP . EQ EXP 
 
+	TIMES	shift 17
 	DIV	shift 12
 
 
@@ -731,6 +733,7 @@ state 39:
 	EXP : EXP . DIV EXP 
 	EXP : EXP . EQ EXP 
 
+	TIMES	shift 17
 	DIV	shift 12
 
 
@@ -752,6 +755,7 @@ state 40:
 	EXP : EXP . DIV EXP 
 	EXP : EXP . EQ EXP 
 
+	TIMES	shift 17
 	DIV	shift 12
 
 
@@ -773,6 +777,7 @@ state 41:
 	EXP : EXP . DIV EXP 
 	EXP : EXP . EQ EXP 
 
+	TIMES	shift 17
 	DIV	shift 12
 
 
@@ -794,6 +799,7 @@ state 42:
 	EXP : EXP . DIV EXP 
 	EXP : EXP . EQ EXP 
 
+	TIMES	shift 17
 	DIV	shift 12
 
 
@@ -1457,5 +1463,5 @@ state 83:
 
 	.	error
 
-206 of 494 action table entries left after compaction
+212 of 500 action table entries left after compaction
 34 goto table entries

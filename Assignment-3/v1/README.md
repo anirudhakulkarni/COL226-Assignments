@@ -16,11 +16,8 @@ Run the executable by
 
 - this will print 2 lines.
 - First will be tokens identified
-- Second will be postorder traversal of tree
+- Second will be AST
 - In case of errors extra lines with type of error and location of error is printed
-- Terminals : without quotes or angular brackerts
-- Non-terminals : with angular brackets
-- Actual value of token : with double quotes
 
 ### Test Cases:
 

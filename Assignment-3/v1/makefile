@@ -5,5 +5,5 @@ run:
 win:
 	cmd /c @ml-yacc Bool.yacc
 	cmd /c @ml-lex Bool.lex
-	cmd /c @sml "loader.sml"
+	cmd /c @a2.mlb
 .PHONY: run

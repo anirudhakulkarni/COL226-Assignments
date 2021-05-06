@@ -36,7 +36,7 @@ datatype statement = Exps of exp*statement
         | Exp of exp
 datatype program = Statement of statement
 
-
+val postorder : string ref = ref ""
 fun envAdd (var:id, v:value, env:environment) =
     (var,v)::env
 

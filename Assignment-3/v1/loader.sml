@@ -9,8 +9,8 @@ use "load-Bool.sml";
 Control.Print.printDepth := 1000;
 Control.Print.stringDepth := 1000;
 Control.Print.printLength := 1000;
-parseFile "test2.txt";
-parseFile "test4.txt";
+(* parseFile "test2.txt";
+parseFile "test4.txt"; *)
 
 (* TokenList:=[]; *)
 

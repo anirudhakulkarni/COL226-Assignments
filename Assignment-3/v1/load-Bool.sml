@@ -42,12 +42,14 @@ fun parseFile filename =
 		(* val _ = print("]") *)
 		(* val _ = print("\n") *)
 		val _ = print("Parser output:\n")
-		(* val _ = print parsedData *)
+		val _ = TextIO.output(TextIO.stdOut, (!AST.postorder))
+		
 		(* val _ = print("\n") *)
     in 
 		parsedData
     end
-(* val args = CommandLine.arguments()
-(* val name =hd args *)
-val _ = parseFile "test1.txt"
-val _ = OS.Process.exit(OS.Process.success) *)
+val args = CommandLine.arguments()
+val name =hd args
+(* val name = "demos/test1.txt"; *)
+val _ = parseFile name
+val _ = OS.Process.exit(OS.Process.success)
